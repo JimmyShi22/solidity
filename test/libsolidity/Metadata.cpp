@@ -69,7 +69,8 @@ BOOST_AUTO_TEST_CASE(metadata_stamp)
 	bytes hash = dev::swarmHash(metadata).asBytes();
 	BOOST_REQUIRE(hash.size() == 32);
 	auto const cborMetadata = requireParsedCBORMetadata(bytecode);
-	BOOST_CHECK(cborMetadata.size() == 1);
+	BOOST_CHECK(cborMetadata.size() == 2);
+	BOOST_CHECK(cborMetadata.count("solc") == 1);
 	BOOST_CHECK(cborMetadata.count("bzzr0") == 1);
 	BOOST_CHECK(cborMetadata.at("bzzr0") == toHex(hash));
 }
@@ -95,7 +96,8 @@ BOOST_AUTO_TEST_CASE(metadata_stamp_experimental)
 	bytes hash = dev::swarmHash(metadata).asBytes();
 	BOOST_REQUIRE(hash.size() == 32);
 	auto const cborMetadata = requireParsedCBORMetadata(bytecode);
-	BOOST_CHECK(cborMetadata.size() == 2);
+	BOOST_CHECK(cborMetadata.size() == 3);
+	BOOST_CHECK(cborMetadata.count("solc") == 1);
 	BOOST_CHECK(cborMetadata.count("bzzr0") == 1);
 	BOOST_CHECK(cborMetadata.at("bzzr0") == toHex(hash));
 	BOOST_CHECK(cborMetadata.count("experimental") == 1);
